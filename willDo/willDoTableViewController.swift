@@ -10,7 +10,7 @@ import UIKit
 
 class willDoTableViewController: UITableViewController{
 
-    let items = ["Buy egg", "Check garage", "Talk with boss"]
+    var items = ["Buy egg", "Check garage", "Talk with boss"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +45,27 @@ class willDoTableViewController: UITableViewController{
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
-
+    
+    //MARK - TableView Add Button
+    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Add willDo item.", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add item", style: .default) { (action) in
+            self.items.append(textField.text!)
+            self.tableView.reloadData()
+        }
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Create new willDo"
+            textField = alertTextField
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
 }
 
