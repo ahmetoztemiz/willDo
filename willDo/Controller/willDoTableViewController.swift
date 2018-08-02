@@ -11,11 +11,16 @@ import UIKit
 class willDoTableViewController: UITableViewController{
 
     var items = ["Buy egg", "Check garage", "Talk with boss"]
+    let defaults = UserDefaults()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
+        if let itemArray = defaults.array(forKey: "willDoList") as? [String] {
+            items = itemArray
+        }
         
     }
     
@@ -53,7 +58,9 @@ class willDoTableViewController: UITableViewController{
         let alert = UIAlertController(title: "Add willDo item.", message: "", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Add item", style: .default) { (action) in
+            
             self.items.append(textField.text!)
+            self.defaults.set(self.items, forKey: "willDoList")
             self.tableView.reloadData()
         }
         

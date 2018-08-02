@@ -54,14 +54,38 @@
 		E34B3F6B2111FC3F00867B09 /* willDo */ = {
 			isa = PBXGroup;
 			children = (
-				E34B3F6C2111FC3F00867B09 /* AppDelegate.swift */,
-				E34B3F6E2111FC3F00867B09 /* willDoTableViewController.swift */,
-				E34B3F702111FC3F00867B09 /* Main.storyboard */,
+				E34B3F7E2112FDD900867B09 /* Model */,
+				E34B3F802112FDF800867B09 /* Controller */,
+				E34B3F7F2112FDE900867B09 /* View */,
 				E34B3F732111FC4100867B09 /* Assets.xcassets */,
-				E34B3F752111FC4100867B09 /* LaunchScreen.storyboard */,
 				E34B3F782111FC4100867B09 /* Info.plist */,
 			);
 			path = willDo;
+			sourceTree = "<group>";
+		};
+		E34B3F7E2112FDD900867B09 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E34B3F7F2112FDE900867B09 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E34B3F702111FC3F00867B09 /* Main.storyboard */,
+				E34B3F752111FC4100867B09 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E34B3F802112FDF800867B09 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E34B3F6C2111FC3F00867B09 /* AppDelegate.swift */,
+				E34B3F6E2111FC3F00867B09 /* willDoTableViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
