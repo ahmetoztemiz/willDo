@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 class willDoTableViewController: UITableViewController{
 
     var items = [Item]()
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,8 +69,9 @@ class willDoTableViewController: UITableViewController{
         let action = UIAlertAction(title: "Add item", style: .default) { (action) in
             
             
-            let newItem = Item()
+            let newItem = Item(context: self.context)
             newItem.title = textField.text!
+            newItem.check = false
             self.items.append(newItem)
             
             self.saveData()
@@ -86,27 +88,22 @@ class willDoTableViewController: UITableViewController{
     }
     
     func saveData(){
-        let encoder = PropertyListEncoder()
         do{
-            let data = try encoder.encode(items)
-            try data.write(to: dataFilePath!)
+            try context.save()
         } catch {
-            print("While running App, error has been occured. \(error)")
+            print("Error occured saving context. \(error)")
         }
-        
         tableView.reloadData()
     }
     
     func loadData() {
-        if let data = try? Data(contentsOf: dataFilePath!) {
-            let decoder = PropertyListDecoder()
-            do {
-                items = try decoder.decode([Item].self, from: data)
-            } catch {
-                print("While running App, error has been occured. \(error)")
-            }
+        let request : NSFetchRequest<Item> = Item.fetchRequest()
+        do {
+            items = try context.fetch(request)
+        } catch {
+            print("Error occured fetching data. \(error)")
         }
-        
+    
     }
     
 }
