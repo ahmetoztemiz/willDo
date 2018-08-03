@@ -10,18 +10,15 @@ import UIKit
 
 class willDoTableViewController: UITableViewController{
 
-    var items = ["Buy egg", "Check garage", "Talk with boss"]
-    let defaults = UserDefaults()
-    
+    var items = [Item]()
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
 
-        if let itemArray = defaults.array(forKey: "willDoList") as? [String] {
-            items = itemArray
-        }
-        
+        loadData()
     }
     
     //MARK - TableView Datasource Model
@@ -32,9 +29,22 @@ class willDoTableViewController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WillDoItemCell", for: indexPath)
+       
+        let item = items[indexPath.row]
         
-        cell.textLabel?.text = items[indexPath.row]
+        cell.textLabel?.text = item.title
         
+//      Ternary Operator
+//      value  = condition ? valueIfTrue : valueIf False
+        cell.accessoryType = item.check == true ? .checkmark: .none
+       
+//        long way
+//        if item.check == true {
+//            cell.accessoryType = .checkmark
+//        } else {
+//            cell.accessoryType = .none
+//        }
+
         return cell
     }
 
@@ -42,13 +52,11 @@ class willDoTableViewController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark {
-           tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        } else {
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
+        items[indexPath.row].check = !items[indexPath.row].check
         
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        saveData()
     }
     
     //MARK - TableView Add Button
@@ -59,9 +67,12 @@ class willDoTableViewController: UITableViewController{
         
         let action = UIAlertAction(title: "Add item", style: .default) { (action) in
             
-            self.items.append(textField.text!)
-            self.defaults.set(self.items, forKey: "willDoList")
-            self.tableView.reloadData()
+            
+            let newItem = Item()
+            newItem.title = textField.text!
+            self.items.append(newItem)
+            
+            self.saveData()
         }
         
         alert.addTextField { (alertTextField) in
@@ -72,6 +83,30 @@ class willDoTableViewController: UITableViewController{
         alert.addAction(action)
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    func saveData(){
+        let encoder = PropertyListEncoder()
+        do{
+            let data = try encoder.encode(items)
+            try data.write(to: dataFilePath!)
+        } catch {
+            print("While running App, error has been occured. \(error)")
+        }
+        
+        tableView.reloadData()
+    }
+    
+    func loadData() {
+        if let data = try? Data(contentsOf: dataFilePath!) {
+            let decoder = PropertyListDecoder()
+            do {
+                items = try decoder.decode([Item].self, from: data)
+            } catch {
+                print("While running App, error has been occured. \(error)")
+            }
+        }
+        
     }
     
 }
