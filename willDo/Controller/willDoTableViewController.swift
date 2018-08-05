@@ -12,14 +12,21 @@ import CoreData
 class willDoTableViewController: UITableViewController{
 
     var items = [Item]()
+    var selectedCategory : Category? {
+        didSet{
+            loadData()
+        }
+    }
+    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
 
-        loadData()
     }
     
     //MARK - TableView Datasource Model
@@ -67,11 +74,10 @@ class willDoTableViewController: UITableViewController{
         let alert = UIAlertController(title: "Add willDo item.", message: "", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Add item", style: .default) { (action) in
-            
-            
             let newItem = Item(context: self.context)
             newItem.title = textField.text!
             newItem.check = false
+            newItem.parentCategory = self.selectedCategory
             self.items.append(newItem)
             
             self.saveData()
@@ -96,15 +102,47 @@ class willDoTableViewController: UITableViewController{
         tableView.reloadData()
     }
     
-    func loadData() {
-        let request : NSFetchRequest<Item> = Item.fetchRequest()
+    func loadData(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        if let additionalPredicate = predicate {
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+        } else {
+            request.predicate = categoryPredicate
+        }
+        
         do {
             items = try context.fetch(request)
         } catch {
             print("Error occured fetching data. \(error)")
         }
-    
+        tableView.reloadData()
     }
     
+}
+//MARK: Search bar methods
+
+extension willDoTableViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print(searchBar.text!)
+        let request : NSFetchRequest<Item> = Item.fetchRequest()
+        
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        
+        loadData(with: request, predicate: predicate)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadData()
+            
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+            
+        }
+    }
 }
 

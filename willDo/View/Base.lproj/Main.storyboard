@@ -9,7 +9,45 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--WillDo-->
+        <!--Category-->
+        <scene sceneID="qkc-py-DgO">
+            <objects>
+                <tableViewController id="l6B-at-2Rp" customClass="CategoryTableViewController" customModule="willDo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0Vu-43-sSy" customClass="Cate">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="categoryCell" id="NjH-cZ-PcP">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NjH-cZ-PcP" id="M6h-wz-dSG">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="l6B-at-2Rp" id="eqD-Mf-fBg"/>
+                            <outlet property="delegate" destination="l6B-at-2Rp" id="ELG-SU-hkH"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Category" id="6QU-Qt-yh1">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="jfD-Bo-FjI">
+                            <connections>
+                                <action selector="addButtonTapped:" destination="l6B-at-2Rp" id="XIk-Ei-s3D"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="6F1-wB-V9X" kind="show" identifier="goToItems" id="twq-fD-MvD"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fJM-V8-739" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1714" y="116"/>
+        </scene>
+        <!--Items-->
         <scene sceneID="bZm-Jl-fQa">
             <objects>
                 <tableViewController id="6F1-wB-V9X" customClass="willDoTableViewController" customModule="willDo" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,9 +55,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="Ca6-p2-MSe">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="6F1-wB-V9X" id="4BN-fG-Nab"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="WillDoItemCell" id="4yL-BF-lwr">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4yL-BF-lwr" id="BRd-Ru-4Np">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -32,17 +78,20 @@
                             <outlet property="delegate" destination="6F1-wB-V9X" id="txh-J9-iMt"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="WillDo" id="juw-MO-3t7">
+                    <navigationItem key="navigationItem" title="Items" id="juw-MO-3t7">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="lTn-dN-6TC">
                             <connections>
                                 <action selector="addButtonTapped:" destination="6F1-wB-V9X" id="Rjx-3p-egc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="Ca6-p2-MSe" id="UZ1-wu-xF7"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6fp-Ja-O26" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1832.8" y="116.49175412293854"/>
+            <point key="canvasLocation" x="2487" y="116"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oS4-jw-fo1">
@@ -59,7 +108,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="6F1-wB-V9X" kind="relationship" relationship="rootViewController" id="2lw-4k-8q4"/>
+                        <segue destination="l6B-at-2Rp" kind="relationship" relationship="rootViewController" id="vNy-tG-fI1"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pGs-Ob-sbO" userLabel="First Responder" sceneMemberID="firstResponder"/>
