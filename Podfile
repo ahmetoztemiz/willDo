@@ -7,5 +7,6 @@ target 'willDo' do
   # Pods for willDo
 
 pod "RealmSwift"
+pod "SwipeCellKit"
 
 end
