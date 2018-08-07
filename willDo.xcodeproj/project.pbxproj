@@ -10,6 +10,7 @@
 		B66B0E576DE007D4F321E747 /* Pods_willDo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BD523E734A597EB8DC82F1C /* Pods_willDo.framework */; };
 		E321E4FB2118414D00DFDE0A /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = E321E4FA2118414D00DFDE0A /* Item.swift */; };
 		E321E4FD2118415800DFDE0A /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = E321E4FC2118415800DFDE0A /* Category.swift */; };
+		E33B04982118992300A6FD2F /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E33B04972118992300A6FD2F /* SwipeTableViewController.swift */; };
 		E34B3F6D2111FC3F00867B09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34B3F6C2111FC3F00867B09 /* AppDelegate.swift */; };
 		E34B3F6F2111FC3F00867B09 /* willDoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E34B3F6E2111FC3F00867B09 /* willDoTableViewController.swift */; };
 		E34B3F722111FC3F00867B09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E34B3F702111FC3F00867B09 /* Main.storyboard */; };
@@ -24,6 +25,7 @@
 		B621AD5BE159B0410B2665B3 /* Pods-willDo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-willDo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-willDo/Pods-willDo.debug.xcconfig"; sourceTree = "<group>"; };
 		E321E4FA2118414D00DFDE0A /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		E321E4FC2118415800DFDE0A /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		E33B04972118992300A6FD2F /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 		E34B3F692111FC3F00867B09 /* willDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = willDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E34B3F6C2111FC3F00867B09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E34B3F6E2111FC3F00867B09 /* willDoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = willDoTableViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				E34B3F6C2111FC3F00867B09 /* AppDelegate.swift */,
 				E34B3F6E2111FC3F00867B09 /* willDoTableViewController.swift */,
 				E365A6612114A39500142360 /* CategoryTableViewController.swift */,
+				E33B04972118992300A6FD2F /* SwipeTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 				E34B3F6F2111FC3F00867B09 /* willDoTableViewController.swift in Sources */,
 				E34B3F6D2111FC3F00867B09 /* AppDelegate.swift in Sources */,
 				E365A6622114A39500142360 /* CategoryTableViewController.swift in Sources */,
+				E33B04982118992300A6FD2F /* SwipeTableViewController.swift in Sources */,
 				E321E4FD2118415800DFDE0A /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class willDoTableViewController: UITableViewController{
+class willDoTableViewController: SwipeTableViewController{
     
     let realm = try! Realm()
     
@@ -37,7 +37,7 @@ class willDoTableViewController: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WillDoItemCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
        
         if let item = items?[indexPath.row]{
             cell.textLabel?.text = item.title
@@ -121,7 +121,19 @@ class willDoTableViewController: UITableViewController{
         
         tableView.reloadData()
     }
-    
+   
+    //MARK - Deletion Method Override Function
+    override func updateModel(at indexPath: IndexPath) {
+        if let currentRow = self.items?[indexPath.row] {
+            do {
+                try self.realm.write {
+                    self.realm.delete(currentRow)
+                }
+            } catch {
+                print("Error occured while deleting item. \(error)")
+            }
+        }
+    }
 }
 //MARK: Search bar methods
 
