@@ -18,6 +18,8 @@ class CategoryTableViewController: SwipeTableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.separatorStyle = .singleLine
+        
         loadCategory()
     }
    
@@ -31,7 +33,7 @@ class CategoryTableViewController: SwipeTableViewController{
         
         let category = categoryArray?[indexPath.row].name
         cell.textLabel?.text = category ?? "No category added yet!"
-        
+         
         return cell
     }
     
@@ -57,7 +59,7 @@ class CategoryTableViewController: SwipeTableViewController{
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
             let newCategory = Category()
             newCategory.name = textField.text!
-            
+
             self.saveCategory(category: newCategory)
         }
         
